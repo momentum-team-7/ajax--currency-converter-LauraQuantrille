@@ -19,13 +19,25 @@ const finalAmountEl = document.querySelector('.final-amount')
 
 
 fetch ('https://api.exchangeratesapi.io/latest')
-  .then(response => response.json())
-  .then(data => {
-    console.log(data)
-    const fromCurrencyEl = data[0].base
-    console.log(fromCurrencyEl)
-  })
+  // // .then(response => response.json())
+  // .then(data => {
+  //   console.log(data)
+  //   const fromCurrencyEl = data[0].base
+  //   console.log(fromCurrencyEl)
+  // })
   
+.then(response => response.json())
+.then (data => {
+  console.log('working?', data)
+
+  fromCurrency = data.rates
+  console.log('fromCurrency is', fromCurrency)
+})
+
+
+
+
+
 
 const currencies = [
   'EUR',
@@ -62,4 +74,3 @@ const currencies = [
   'KRW',
   'MYR'
 ]
-
