@@ -9,45 +9,95 @@
   
 // }
 
-const fromCurrencyEl = document.querySelector('#convert-from')
-const fromAmountEl = document.querySelector('#from-amount-field')
-const toCurrencyEl = document.querySelector('#convert-to')
-const toAmountEl = document.querySelector('#to-amount-field')
-const finalAmountEl = document.querySelector('.final-amount')
-const convert = document.querySelector('.convert')
-console.log(fromCurrencyEl)
+// const baseUrl = 'https://api.exchangeratesapi.io/latest?base='
 
-fromCurrencyEl.addEventListener('change',(event)=>{
-  console.log("event", event.target.value)
-} )
+// const fromCurrencyEl = document.querySelector('#convert-from')
+// const fromAmountEl = document.querySelector('#from-amount-field')
+// const toCurrencyEl = document.querySelector('#convert-to')
+// const toAmountEl = document.querySelector('#to-amount-field')
+// const finalAmountEl = document.querySelector('.final-amount')
+// const convertButton = document.querySelector('.convert')
+// console.log(fromCurrencyEl)
 
-toCurrencyEl.addEventListener('change',(event)=>{
-  console.log("event", event.target.value)
-})
+// let rates
+// console.log({rates})
 
-convert.addEventListener('click',(event) => {
-  console.log("convert", event.target.convert)
-  console.log(fromCurrencyEl.value)
-})
+// fromCurrencyEl.addEventListener('change',(event)=>{
+//   console.log("event", event.target.value)
+// } )
+
+// toCurrencyEl.addEventListener('change',(event)=>{
+//   console.log("event", event.target.value)
+// })
+
+// convert.addEventListener('click',(event) => {
+//   console.log("convert", event.target.convert)
+//   console.log(fromCurrencyEl.value)
+// })
 
 
 
-fetch ('https://api.exchangeratesapi.io/latest')
-  // // .then(response => response.json())
-  // .then(data => {
-  //   console.log(data)
-  //   const fromCurrencyEl = data[0].base
-  //   console.log(fromCurrencyEl)
-  // })
+
+
+// fetch ('baseUrl')
   
-.then(response => response.json())
-.then (data => {
-  console.log('working?', data)
+// .then(response => response.json())
+// .then (data => {
+//   console.log('working?', data)
 
-  fromCurrency = data.rates
-  console.log('fromCurrency is', fromCurrency)
+//   fromCurrency = data.rates
+//   console.log('fromCurrency is', fromCurrency)
+// })
+
+
+const urlBase = 'https://api.exchangeratesapi.io/latest?base='
+const fromCurrency = document.querySelector('#convert-from')
+const fromAmount = document.querySelector('.from-amount-field')
+const toCurrency = document.querySelector('#convert-to')
+const finalAmountDiv = document.querySelector('.final-amount')
+const convertButton = document.querySelector('#convert')
+const amount = document.querySelector('#to-amount-field')
+console.log('toCurrency is', toCurrency)
+
+
+convertButton.addEventListener('click',(event) => {
+  console.log("convert", event.target)
+  const fromCurrencyCode = fromCurrency.value.replace('"','')
+  console.log(fromCurrencyCode.length)
+  console.log('fromCurrency is', fromCurrency.value)
+  const toCurrencyCode = toCurrency.value.replace('"','')
+  console.log('toCurrency is', toCurrency.value)
+  const convertAmount = amount.value
+  
+  console.log('amount is', amount.value)
+  convert(fromCurrencyCode, toCurrencyCode, convertAmount)
 })
+// fetch (urlBase)
+//   .then(response => response.json())
+//   .then(data => {
+//     console.log('working?', data)
+//     fromCurrencyEl = data.rates
+//     console.log('fromCurrencyEl is ', fromCurrencyEl)
+//   })
 
+  function convert (from, to, amount) {
+  console.log(from)
+    fetch(urlBase + from)
+      .then(response => response.json())
+      .then(data => {
+        let rates = data.rates
+        console.log(rates[to]) 
+        calculate(rates[to], amount)
+      })
+  }
+  
+  function calculate (rate, amount) {
+    console.log('Exchange rate is ', rate)
+    let result = (amount * rate).toFixed(2)
+    finalAmountDiv.innerHTML = `<p>${result}</p>`
+    
+
+  }
 
 
 
