@@ -9,12 +9,26 @@
   
 // }
 
-const fromCurrencyEl = document.querySelector('.convert-from')
-const fromAmountEl = document.querySelector('.from-amount-field')
-const toCurrencyEl = document.querySelector('.convert-to')
-const toAmountEl = document.querySelector('.to-amount-field')
+const fromCurrencyEl = document.querySelector('#convert-from')
+const fromAmountEl = document.querySelector('#from-amount-field')
+const toCurrencyEl = document.querySelector('#convert-to')
+const toAmountEl = document.querySelector('#to-amount-field')
 const finalAmountEl = document.querySelector('.final-amount')
+const convert = document.querySelector('.convert')
+console.log(fromCurrencyEl)
 
+fromCurrencyEl.addEventListener('change',(event)=>{
+  console.log("event", event.target.value)
+} )
+
+toCurrencyEl.addEventListener('change',(event)=>{
+  console.log("event", event.target.value)
+})
+
+convert.addEventListener('click',(event) => {
+  console.log("convert", event.target.convert)
+  console.log(fromCurrencyEl.value)
+})
 
 
 
